@@ -19,49 +19,57 @@ The API offers the following features:
 ### GET /guests
 Returns a list of all guests.
 
-\`\`\`http
+```bash
 GET /guests
-\`\`\`
+```
 
 
 ### GET /guests/search?last_name={last_name}
 Searches for a guest based on their last name.
 
-\`\`\`http
+```bash
 GET /guests/search?last_name={last_name}
-\`\`\`
+```
+
+
 
 
 ### POST /guests
 Adds a new guest to the database.
 
-\`\`\`http
+```bash
 POST /guests
-\`\`\`
+```
+
+
+
 
 
 ### PUT /guests/{id}
 Updates an existing guest's information.
 
-\`\`\`http
+```bash
 PUT /guests/{id}
-\`\`\`
+```
+
 
 
 ### GET /guests/{id}
 Retrieves a guest's details based on their ID.
 
-\`\`\`http
+```bash
 GET /guests/{id}
-\`\`\`
+```
+
+
 
 
 ### DELETE /guests/{id}
 Deletes a guest based on their ID.
 
-\`\`\`http
+```bash
 DELETE /guests/{id}
-\`\`\`
+```
 
 
 
@@ -73,16 +81,16 @@ DELETE /guests/{id}
 
 1. Build the Docker image:
 
-   \`\`\`bash
+   ```bash
    docker build -t kong_arthur_guest .
-   \`\`\`
+   ```
 
 
 2. Run the Docker container with a volume binding:
 
-   \`\`\`bash
+   ```bash
    docker run -it -p 5000:5000 -v miniprojekt:/app/data kong_arthur_guest
-   \`\`\`
+   ```
 
 This will start the server at \`http://localhost:5000\`.
 

@@ -92,6 +92,5 @@ DELETE /guests/{id}
    docker run -it -p 5000:5000 -v miniprojekt:/app/data kong_arthur_guest
    ```
 
-This will start the server at \`http://localhost:5000\`.
 
 

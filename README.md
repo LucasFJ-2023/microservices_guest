@@ -20,3 +20,43 @@ Returnerer en liste over alle gæster.
 
 ```http
 GET /guests
+
+
+### GET /guests/search?last_name={last_name}
+Returnere en liste af gæster med det søgte efternavn
+
+```http
+GET /guests/search?last_name={last_name}
+
+
+### POST /guests
+Opret en ny gæst
+
+```http
+POST /guests
+
+
+### PUT /guests/{id}
+Opdater en eksisterende gæsts oplysninger
+
+```http
+PUT /guests/{id}
+
+
+
+
+##Installation
+
+Byg Docker-billedet
+```http
+docker build -t kong_arthur_guest .
+
+
+Kør Docker-containeren med en volumebinding:
+```http
+docker run -it -p 5000:5000 -v miniprojekt:/app/data kong_arthur_guest
+
+
+
+
+

@@ -1,62 +1,89 @@
+cat <<EOF > README.md
 # Kong Arthur Guest Management Service
 
-Denne applikation er en Flask-baseret REST API, der håndterer CRUD-operationer for en gæstedatabase. Dataene gemmes i en SQLite-database (`guests.db`), som er forbundet til Docker-volumenet for at sikre persistent data.
+This application is a Flask-based REST API that handles CRUD operations for a guest database. The data is stored in an SQLite database (\`guests.db\`), which is connected to a Docker volume to ensure persistent data.
 
-## Funktionalitet
+## Functionality
 
-API'et tilbyder følgende funktioner:
+The API offers the following features:
 
-- **Få alle gæster** - Henter en liste over alle gæster.
-- **Søg efter gæst efter efternavn** - Henter en gæst baseret på efternavn.
-- **Tilføj ny gæst** - Tilføjer en ny gæst til databasen.
-- **Opdater gæsteinformation** - Opdaterer en eksisterende gæsts oplysninger.
-- **Hent gæst efter ID** - Henter en gæsts detaljer ved hjælp af deres unikke ID.
-- **Slet gæst efter ID** - Sletter en gæst baseret på deres ID.
+- **Get all guests** - Retrieves a list of all guests.
+- **Search for a guest by last name** - Retrieves a guest based on their last name.
+- **Add a new guest** - Adds a new guest to the database.
+- **Update guest information** - Updates an existing guest's information.
+- **Get a guest by ID** - Retrieves a guest's details using their unique ID.
+- **Delete a guest by ID** - Deletes a guest based on their ID.
 
 ## Endpoints
 
 ### GET /guests
-Returnerer en liste over alle gæster.
+Returns a list of all guests.
 
-```http
+\`\`\`http
 GET /guests
+\`\`\`
 
 
 ### GET /guests/search?last_name={last_name}
-Returnere en liste af gæster med det søgte efternavn
+Searches for a guest based on their last name.
 
-```http
+\`\`\`http
 GET /guests/search?last_name={last_name}
+\`\`\`
 
 
 ### POST /guests
-Opret en ny gæst
+Adds a new guest to the database.
 
-```http
+\`\`\`http
 POST /guests
+\`\`\`
 
 
 ### PUT /guests/{id}
-Opdater en eksisterende gæsts oplysninger
+Updates an existing guest's information.
 
-```http
+\`\`\`http
 PUT /guests/{id}
+\`\`\`
+
+
+### GET /guests/{id}
+Retrieves a guest's details based on their ID.
+
+\`\`\`http
+GET /guests/{id}
+\`\`\`
+
+
+### DELETE /guests/{id}
+Deletes a guest based on their ID.
+
+\`\`\`http
+DELETE /guests/{id}
+\`\`\`
 
 
 
 
-##Installation
-
-Byg Docker-billedet
-```http
-docker build -t kong_arthur_guest .
+## Installation
 
 
-Kør Docker-containeren med en volumebinding:
-```http
-docker run -it -p 5000:5000 -v miniprojekt:/app/data kong_arthur_guest
+### Build and run the application
+
+1. Build the Docker image:
+
+   \`\`\`bash
+   docker build -t kong_arthur_guest .
+   \`\`\`
 
 
+2. Run the Docker container with a volume binding:
 
+   \`\`\`bash
+   docker run -it -p 5000:5000 -v miniprojekt:/app/data kong_arthur_guest
+   \`\`\`
+
+This will start the server at \`http://localhost:5000\`.
 
 

@@ -1,4 +1,3 @@
-cat <<EOF > README.md
 # Kong Arthur Guest Management Service
 
 This application is a Flask-based REST API that handles CRUD operations for a guest database. The data is stored in an SQLite database (\`guests.db\`), which is connected to a Docker volume to ensure persistent data.

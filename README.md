@@ -21,6 +21,9 @@ Returns a list of all guests.
 ```bash
 GET /guests
 ```
+Respons code:
+- 200, Ok
+- 404, Not found
 
 
 ### GET /guests/search?last_name={last_name}
@@ -29,6 +32,9 @@ Searches for a guest based on their last name.
 ```bash
 GET /guests/search?last_name={last_name}
 ```
+Respons code:
+- 200, Ok
+- 404, Not found
 
 
 
@@ -39,7 +45,7 @@ Adds a new guest to the database.
 ```bash
 POST /guests
 ```
-Inde i body skal indholdet skrives i JSON-format. Det kan se ud som følgende:
+Inside the body, the text should be in JSON-format
 ```bash
 {
 "first_name": "Lucas",
@@ -47,7 +53,9 @@ Inde i body skal indholdet skrives i JSON-format. Det kan se ud som følgende:
 "country": "Denmark"  
 }
 ```
-
+Respons code:
+- 201, Created
+- 400, Bad request
 
 
 
@@ -57,6 +65,9 @@ Updates an existing guest's information.
 ```bash
 PUT /guests/{id}
 ```
+Respons code:
+- 200, Ok
+- 404, Not found
 
 
 
@@ -66,6 +77,9 @@ Retrieves a guest's details based on their ID.
 ```bash
 GET /guests/{id}
 ```
+Respons code:
+- 200, Ok
+- 404, Not found
 
 
 
@@ -76,6 +90,9 @@ Deletes a guest based on their ID.
 ```bash
 DELETE /guests/{id}
 ```
+Respons code:
+- 200, Ok
+- 404, Not found
 
 
 

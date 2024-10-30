@@ -39,7 +39,14 @@ Adds a new guest to the database.
 ```bash
 POST /guests
 ```
-
+Inde i body skal indholdet skrives i JSON-format. Det kan se ud som følgende:
+```bash
+{
+"first_name": "Lucas",
+"last_name": "Jacobsen,
+"country": "Denmark"  
+}
+```
 
 
 

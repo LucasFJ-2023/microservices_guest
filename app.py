@@ -20,7 +20,11 @@ def get_guests():
     conn = get_db_connection()
     guests = conn.execute("SELECT * FROM guests").fetchall()
     conn.close()
-    return jsonify([dict(guest) for guest in guests])
+    
+    if guests:
+        return jsonify([dict(guest) for guest in guests]), 200
+    else:
+        return jsonify({"error": "Not found"}), 404
 
 
 # GET GUEST BY LAST NAME
@@ -30,7 +34,11 @@ def search_guest_by_last_name():
     conn = get_db_connection()
     guests = conn.execute("SELECT * FROM guests WHERE last_name = ?", (last_name,)).fetchall()
     conn.close()
-    return jsonify([dict(guest) for guest in guests])
+
+    if guests:
+        return jsonify([dict(guest) for guest in guests]), 200
+    else:
+        return jsonify({"error": "Not found"}), 404    
 
 
 
@@ -48,7 +56,11 @@ def create_guest():
     conn.commit()
     conn.close()
     
-    return jsonify({'message': 'Guest added succesfully'})
+    if new_guest:
+        return jsonify({'message': 'Guest added succesfully'}), 201
+    else:
+        return jsonify({"error": "Bad request"}), 400
+
 
 
 
@@ -64,7 +76,10 @@ def change_guest_information(id):
     conn.commit()
     conn.close()
 
-    return jsonify({'message': 'Guest information updated successfully'})
+    if update_guest:
+        return jsonify({'message': 'Guest information updated successfully'}), 200
+    else:
+        return jsonify({"error": "Not found"}), 404    
    
     
 
@@ -75,7 +90,11 @@ def get_guest(id):
     guest = conn.execute("SELECT * FROM guests WHERE id = ?", (id,)).fetchone()
     conn.close()
 
-    return jsonify(dict(guest))                     
+    if guest:
+        return jsonify(dict(guest)), 200
+    else:
+        return jsonify({"error": "Not found"}), 404
+
 
 
 
@@ -92,16 +111,32 @@ def delete_guest(id):
     conn.commit()
     conn.close()
 
-    return jsonify({'message': 'Guest is deleted succesfully'})
+    if delete_guest:
+        return jsonify({'message': 'Guest is deleted succesfully'}), 200
+    else:
+        return jsonify({"error": "Not found"}), 404    
 
 
+#Send all data
+@app.route('/guests/data', methods=["GET"])
+def get_bookings_data():
+    with sqlite3.connect('/app/data/guests.db') as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM guests")
+        data = cur.fetchall()
+
+        #Check the response
+        if not data:
+            #response is empty
+            return "There was an error trying to retrieve all guests!", 400
+        return data
 
     
 
 
 
-app.run(debug=True, host='0.0.0.0', port=5000)
+app.run(debug=True, host='0.0.0.0')
 
 
 # docker build -t kong_arthur_guest .    -> Først skrives den her nede i terminalen
-# docker run -it -p 5000:5000 -v miniprojekt:/app/data kong_arthur_guest    -> Derefter køres denne i terminalen
+# docker run -it -p 5001:5001 -v miniprojekt:/app/data kong_arthur_guest    -> Derefter køres denne i terminalen
